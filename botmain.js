@@ -1,5 +1,4 @@
 const Discord = require('discord.js')
-const Keyv = require('keyv')
 const { token, prefix } = require('./config.json')
 const client = new Discord.Client()
 
@@ -68,13 +67,6 @@ client.on('message', async msg => {
                 let userAvatar = msg.mentions.users.first();
                 await msg.channel.send(userAvatar.avatarURL());
             }
-        }
-        if(CMD_NAME === 'balance'){
-            if(msg.author.bot) return;
-            const keyv = new Keyv('sqlite://path/to/database.sqlite');
-            const user = msg.author.id;
-            await keyv.set(user, arg)
-            await msg.channel.send('Balance added!');
         }
     }
 })
