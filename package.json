@@ -1,0 +1,8 @@
+{
+  "name": "BelBot",
+  "version": "1.0.0",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "keyv": "^4.0.3"
+  }
+}
