@@ -9,12 +9,12 @@ client.on('ready', () => {
 client.on('message', async msg => {
     if(msg.author.bot) return;
     if(!msg.content.startsWith(prefix)) return;
-    if(msg.content.startsWith(prefix)){
+    if (msg.content.startsWith(prefix)) {
         const [CMD_NAME, ...arg] = msg.content
             .trim()
             .substring(prefix.length)
             .split(/\s+/);
-        if(CMD_NAME === 'kick') {
+        if (CMD_NAME === 'kick') {
             if (!msg.member.hasPermission('KICK_MEMBERS'))
                 await msg.reply(`You don't have permissions!`);
             else if (!msg.mentions.members.first())
@@ -29,7 +29,7 @@ client.on('message', async msg => {
                 if (bootedUser) {
                     try {
                         await bootedUser.kick();
-                    } catch(e){
+                    } catch (e) {
                         await msg.channel.send(`I have no perms!`);
                     }
                     await msg.channel.send(`${bootedUser} was booted`);
@@ -38,35 +38,38 @@ client.on('message', async msg => {
                 }
             }
         }
-        if(CMD_NAME === 'ban'){
-            if(!msg.member.hasPermission('BAN_MEMBERS'))
+        if (CMD_NAME === 'ban') {
+            if (!msg.member.hasPermission('BAN_MEMBERS'))
                 await msg.reply(`You don't have perms`);
-            if(!msg.mentions.users.first())
+            if (!msg.mentions.users.first())
                 await msg.reply('You need to mention somebody idiot!');
-            else{
+            else {
                 let member = msg.mentions.members.first();
-                if(member){
+                if (member) {
                     delete arg[0];
                     let res = arg.join(' ');
                     try {
-                        await member.ban({'reason': res});
+                        await member.ban({ 'reason': res });
                         await msg.channel.send(`${member} was booted for ${res}`);
                     } catch (e) {
                         await msg.channel.send('I have no perms!');
                     }
                 }
-                else{
+                else {
                     await msg.channel.send(`${member} doesn't exist`);
                 }
             }
         }
-        if(CMD_NAME === 'avatar'){
-            if(msg.author.bot) return;
-            if(!msg.mentions.users.first()) return msg.channel.send(msg.author.avatarURL());
-            else{
+        if (CMD_NAME === 'avatar') {
+            if (msg.author.bot) return;
+            if (!msg.mentions.users.first()) return msg.channel.send(msg.author.avatarURL());
+            else {
                 let userAvatar = msg.mentions.users.first();
                 await msg.channel.send(userAvatar.avatarURL());
             }
+        }
+        if (CMD_NAME === 'test') {
+            return;
         }
     }
 })
